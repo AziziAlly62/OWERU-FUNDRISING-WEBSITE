@@ -1,0 +1,7 @@
+echo "# OWERU-FUNDRISING-WEBSITE" >> README.md
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/AziziAlly62/OWERU-FUNDRISING-WEBSITE.git
+git push -u origin main

@@ -1,0 +1,969 @@
+﻿@import "tailwindcss";
+
+/* ============================================================
+   OWERU FOUNDATION — DESIGN SYSTEM
+   ------------------------------------------------------------
+   Direction: calm editorial charity. Dignified, warm, precise.
+   Nothing decorative for decoration's sake.
+
+   1. COLOUR   deep forest green (trust) + warm gold (giving)
+               + terracotta (attention) on warm paper white
+   2. TYPE     Fraunces (serif) for voice, Inter for interface
+   3. GEOMETRY 4px grid, 8-16px radii, hairline borders,
+               shadows only where something truly floats
+   4. MOTION   short, few, purposeful
+   ============================================================ */
+
+@theme {
+  /* ---------- Brand: Forest — primary ---------- */
+  --color-oweru-50: #eff7f3;
+  --color-oweru-100: #d8ece3;
+  --color-oweru-200: #b3d8c8;
+  --color-oweru-300: #82bda6;
+  --color-oweru-400: #4f9c81;
+  --color-oweru-500: #2f7f65;
+  --color-oweru-600: #1f6550;
+  --color-oweru-700: #185141;
+  --color-oweru-800: #0e3b2e;
+  --color-oweru-900: #0b2e25;
+  --color-oweru-950: #061c17;
+
+  /* ---------- Gold — the giving accent.
+        Always paired with ink-950 text, never white. ---------- */
+  --color-gold-50: #fdf7ea;
+  --color-gold-100: #f9ebcb;
+  --color-gold-200: #f2d795;
+  --color-gold-300: #e9be5e;
+  --color-gold-400: #dfa63a;
+  --color-gold-500: #cf9222;
+  --color-gold-600: #ac711a;
+  --color-gold-700: #8a581b;
+  --color-gold-800: #73481e;
+  --color-gold-900: #613d1e;
+  --color-gold-950: #37220d;
+
+  /* accent-* was byte-for-byte identical to error-* and had no consumers.
+     Removed: two names for one colour is how a palette drifts apart. */
+
+  /* ---------- Ink — text, green-cast near-black ---------- */
+  --color-ink-50: #f1f5f3;
+  --color-ink-100: #e3ebe7;
+  --color-ink-200: #c9d7d1;
+  --color-ink-300: #a3b8b0;
+  --color-ink-400: #7c948b;
+  --color-ink-500: #5a7167;
+  --color-ink-600: #435850;
+  --color-ink-700: #33453e;
+  --color-ink-800: #1e2f29;
+  --color-ink-900: #14231e;
+  --color-ink-950: #0a1411;
+
+  /* ---------- Status ---------- */
+  --color-success-50: #eef6f1;
+  --color-success-100: #d7eade;
+  --color-success-200: #b2d4c1;
+  --color-success-500: #2f7f65;
+  --color-success-600: #1f6550;
+  --color-success-700: #185141;
+  --color-warning-50: #fdf8ec;
+  --color-warning-100: #f8ecc9;
+  --color-warning-500: #b98a1c;
+  --color-warning-600: #96700f;
+  --color-warning-700: #785a12;
+  --color-error-50: #fdf2ef;
+  --color-error-100: #fadfd8;
+  --color-error-200: #f4bdaa;
+  --color-error-500: #c2603f;
+  --color-error-600: #a64d31;
+  --color-error-700: #893f2b;
+  --color-error-800: #6d3222;
+  /* Info mirrors the oweru ramp. It exists as its own scale so admin status
+     tables can say "info" instead of reaching for Tailwind's blue, which
+     sits outside the brand. */
+  --color-info-50: #eff7f3;
+  --color-info-100: #d8ece3;
+  --color-info-200: #b3d8c8;
+  --color-info-500: #2f7f65;
+  --color-info-600: #1f6550;
+  --color-info-700: #185141;
+
+  /* Safety net, not a second palette. Tailwind's stock green and yellow are
+     remapped onto the oweru and gold ramps, so a stray bg-green-500 or
+     text-yellow-600 still lands on-brand instead of Tailwind's stock #22c55e.
+     The codebase itself now uses only the success, warning, error and info
+     scales — keep it that way, because two names for one colour is how a
+     palette drifts. Verified: 0 usages of green or yellow classes in src. */
+  --color-green-50: #eff7f3;
+  --color-green-100: #d8ece3;
+  --color-green-200: #b3d8c8;
+  --color-green-300: #82bda6;
+  --color-green-400: #4f9c81;
+  --color-green-500: #2f7f65;
+  --color-green-700: #185141;
+  --color-green-800: #0e3b2e;
+  --color-yellow-400: #dfa63a;
+  --color-yellow-500: #cf9222;
+
+  /* ---------- Surfaces: warm paper, never cold grey ---------- */
+  --color-paper: #f7f5f0;
+  --color-paper-strong: #edeae2;
+  --color-grey: #f7f5f0;
+  --color-cream: #fbf8f2;
+  --color-sage: #e7efea;
+  /* Deep navy for the About values band. Cooler than ink so the section
+     separates from the dark green used elsewhere. */
+  --color-navy-900: #123d55;
+  --color-surface: #ffffff;
+  /* Subtle neutral band used to separate long pages. */
+  --color-haze: #f1f0ec;
+  /* Dark emphasis band: warmer, flatter black than ink-950. */
+  --color-coal: #101a16;
+
+  /* ---------- Type ---------- */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', Menlo, monospace;
+
+  /* ---------- Radii: restrained, never bubbly ---------- */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-btn: 10px;
+
+  /* ---------- Elevation: two levels only ---------- */
+  --shadow-card: 0 1px 2px rgba(10, 20, 17, 0.04), 0 4px 12px rgba(10, 20, 17, 0.04);
+  --shadow-lift: 0 2px 4px rgba(10, 20, 17, 0.05), 0 12px 28px rgba(10, 20, 17, 0.09);
+  --shadow-pop: 0 4px 8px rgba(10, 20, 17, 0.06), 0 24px 48px rgba(10, 20, 17, 0.14);
+
+  /* ---------- Motion ---------- */
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+  html, body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink-900);
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: -0.003em;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  #root {
+    min-width: 0;
+    width: 100%;
+    overflow-x: clip;
+  }
+
+  /* ---------- Headings: the serif voice ---------- */
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.022em;
+    color: inherit;
+    font-variation-settings: 'SOFT' 0, 'WONK' 0;
+  }
+  h1 { font-size: clamp(2rem, 1.35rem + 2.1vw, 2.9rem); }
+  h2 { font-size: clamp(1.55rem, 1.2rem + 1.25vw, 2.15rem); }
+  h3 { font-size: clamp(1.18rem, 1.06rem + 0.5vw, 1.4rem); }
+  h4 { font-size: 1.0625rem; letter-spacing: -0.012em; }
+  h5 { font-size: 0.9375rem; }
+
+  p { color: var(--text-body, var(--color-ink-600)); }
+  small, .text-sm, .text-xs { color: var(--text-muted, var(--color-ink-500)); }
+
+  /* Any dark surface flips body/muted colours for its descendants. */
+  .text-white, .on-dark, .band-dark {
+    --text-body: rgba(255, 255, 255, 0.88);
+    --text-muted: rgba(255, 255, 255, 0.68);
+  }
+
+  a {
+    color: var(--color-oweru-700);
+    text-decoration: none;
+    transition: color 0.16s ease;
+  }
+  a:hover { color: var(--color-oweru-900); }
+
+  ::selection {
+    background: var(--color-gold-200);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-oweru-600);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  /* Quiet, on-brand scrollbar */
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: var(--color-paper); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-200);
+    border-radius: 999px;
+    border: 3px solid var(--color-paper);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-ink-300); }
+
+  img { max-width: 100%; }
+  ul, ol { padding-inline-start: 1.15rem; }
+}
+
+@layer components {
+  /* ============================================================
+     1. LAYOUT SCAFFOLDING
+     ============================================================ */
+  .container-responsive {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  @media (max-width: 640px) {
+    .container-responsive { padding: 0 1.125rem; }
+  }
+
+  .section-padding { padding: 5.5rem 0; }
+  .section-sm { padding: 3.5rem 0; }
+  @media (max-width: 767px) {
+    .section-padding { padding: 3.5rem 0; }
+    .section-sm { padding: 2.5rem 0; }
+  }
+
+  .grid-responsive {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) { .grid-responsive { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .grid-responsive { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1280px) { .grid-responsive { grid-template-columns: repeat(4, 1fr); } }
+
+  /* Hairline rule used to separate editorial bands */
+  .rule { height: 1px; background: var(--color-ink-200); border: 0; }
+  .rule-light { height: 1px; background: rgba(255, 255, 255, 0.16); border: 0; }
+
+  /* ============================================================
+     2. TYPE UTILITIES
+     ============================================================ */
+  .display-xl { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.6rem, 1.5rem + 3.6vw, 4.25rem); line-height: 1.04; letter-spacing: -0.032em; }
+  .display-lg { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.1rem, 1.4rem + 2.4vw, 3.25rem); line-height: 1.08; letter-spacing: -0.028em; }
+  .display-md { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 1.25rem + 1.3vw, 2.25rem); line-height: 1.15; letter-spacing: -0.024em; }
+
+  /* Body copy that must stay readable against photography. */
+  .lede {
+    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.1875rem);
+    line-height: 1.6;
+    color: var(--text-body, var(--color-ink-600));
+  }
+
+  /* Uppercase micro-label: used sparingly, never for whole sentences. */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-oweru-700);
+  }
+  .eyebrow-on-dark { color: var(--color-gold-300); }
+
+  /* Legacy alias kept so 70+ call sites keep working. */
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-oweru-700);
+  }
+  .kicker::before {
+    content: '';
+    display: block;
+    width: 1.25rem;
+    height: 1px;
+    background: var(--color-gold-500);
+  }
+  .kicker-on-dark { color: var(--color-gold-300); }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Long-form legal / policy copy. */
+  .prose-oweru { max-width: 68ch; }
+  .prose-oweru h2 { margin-top: 2.5rem; margin-bottom: 0.75rem; }
+  .prose-oweru h3 { margin-top: 1.75rem; margin-bottom: 0.5rem; }
+  .prose-oweru p { margin-bottom: 1rem; line-height: 1.75; }
+  .prose-oweru ul { margin: 0 0 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .prose-oweru li { line-height: 1.7; }
+  .prose-oweru strong { color: var(--color-ink-900); font-weight: 600; }
+
+  /* ============================================================
+     3. CARDS & SURFACES
+     ============================================================ */
+  .card-base,
+  .surface-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-ink-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s var(--ease-out-soft);
+  }
+  /* Only lift on devices that can hover, and only a little. */
+  @media (hover: hover) {
+    .card-base:hover,
+    .surface-card:hover {
+      border-color: var(--color-oweru-300);
+      box-shadow: var(--shadow-lift);
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Flat panel: no shadow, just a hairline. Used inside cards. */
+  .panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-ink-200);
+    border-radius: var(--radius-lg);
+  }
+  .panel-quiet {
+    background: var(--color-paper);
+    border: 1px solid var(--color-ink-200);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Dark band: the one place the forest green goes full-bleed. */
+  .band-dark {
+    background: var(--color-oweru-900);
+    color: #fff;
+  }
+  .band-dark h1, .band-dark h2, .band-dark h3, .band-dark h4, .band-dark h5 { color: #fff; }
+  .band-dark p { color: rgba(255, 255, 255, 0.78); }
+  .band-dark a { color: #fff; }
+  .band-dark small, .band-dark .text-sm, .band-dark .text-xs { color: rgba(255, 255, 255, 0.66); }
+
+  /* Sand band for a softer break between white sections. */
+  .band-sand { background: var(--color-cream); }
+
+  /* ============================================================
+     4. PAGE HERO
+     ============================================================ */
+  .page-hero {
+    position: relative;
+    background: var(--color-cream);
+    border-bottom: 1px solid var(--color-ink-200);
+  }
+  .page-hero .page-hero-inner { position: relative; z-index: 1; }
+  .page-hero h1 { max-width: 22ch; }
+  .page-hero-dark {
+    background: var(--color-oweru-900);
+    border-bottom: 0;
+    color: #fff;
+  }
+  .page-hero-dark h1, .page-hero-dark p { color: #fff; }
+  .page-hero-dark p { color: rgba(255, 255, 255, 0.8); }
+
+  /* ============================================================
+     5. BUTTONS
+     Square-ish, confident, never bubbly. Gold = the give action.
+     ============================================================ */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--color-gold-500);
+    color: var(--color-ink-950);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    letter-spacing: -0.005em;
+    padding: 0.8125rem 1.5rem;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--color-gold-500);
+    cursor: pointer;
+    transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--color-gold-400);
+    border-color: var(--color-gold-400);
+    color: var(--color-ink-950);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(207, 146, 34, 0.28);
+  }
+  .btn-primary:active:not(:disabled) { transform: none; }
+  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--color-surface);
+    color: var(--color-oweru-800);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    padding: 0.8125rem 1.5rem;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--color-ink-300);
+    cursor: pointer;
+    transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--color-oweru-50);
+    border-color: var(--color-oweru-600);
+    color: var(--color-oweru-900);
+  }
+  .btn-secondary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  /* Forest-filled: used for confirmed, "logged in", safe actions. */
+  .btn-forest {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--color-oweru-800);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    padding: 0.8125rem 1.5rem;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--color-oweru-800);
+    cursor: pointer;
+    transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+  }
+  .btn-forest:hover:not(:disabled) {
+    background: var(--color-oweru-700);
+    border-color: var(--color-oweru-700);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .btn-forest:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  /* Outline for dark surfaces. */
+  .btn-on-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    padding: 0.8125rem 1.5rem;
+    border-radius: var(--radius-btn);
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    cursor: pointer;
+    transition: background 0.16s ease, border-color 0.16s ease;
+  }
+  .btn-on-dark:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.85);
+    color: #fff;
+  }
+  .btn-on-dark:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: transparent;
+    color: var(--color-ink-600);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.16s ease, color 0.16s ease;
+  }
+  .btn-ghost:hover:not(:disabled) { background: var(--color-ink-50); color: var(--color-ink-900); }
+
+  .btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--color-error-600);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    padding: 0.8125rem 1.5rem;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--color-error-600);
+    cursor: pointer;
+    transition: background 0.16s ease;
+  }
+  .btn-danger:hover:not(:disabled) { background: var(--color-error-700); }
+
+  .btn-sm { padding: 0.5rem 0.9rem; font-size: 0.8125rem; border-radius: var(--radius-sm); }
+  .btn-lg { padding: 0.95rem 1.85rem; font-size: 1rem; }
+  .btn-block { width: 100%; }
+
+  /* Text link with an underline that appears on hover. */
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-oweru-700);
+  }
+  .link-arrow:hover { color: var(--color-oweru-900); }
+  .link-arrow .icon { transition: transform 0.18s var(--ease-out-soft); }
+  .link-arrow:hover .icon { transform: translateX(3px); }
+
+  /* ============================================================
+     6. FORMS
+     ============================================================ */
+  .input-base,
+  form input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
+  form select,
+  form textarea {
+    width: 100%;
+    padding: 0.6875rem 0.875rem;
+    border: 1px solid var(--color-ink-300);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    box-shadow: 0 1px 2px rgba(10, 20, 17, 0.03);
+    transition: border-color 0.16s ease, box-shadow 0.16s ease;
+  }
+  form textarea { min-height: 7rem; resize: vertical; }
+  .input-base::placeholder,
+  form input::placeholder,
+  form textarea::placeholder { color: var(--color-ink-400); }
+
+  .input-base:focus,
+  form input:not([type='checkbox']):not([type='radio']):not([type='file']):focus,
+  form select:focus,
+  form textarea:focus {
+    outline: none;
+    border-color: var(--color-oweru-600);
+    box-shadow: 0 0 0 3px rgba(31, 101, 80, 0.13);
+  }
+  form input:disabled, form select:disabled, form textarea:disabled {
+    background: var(--color-paper);
+    color: var(--color-ink-400);
+    cursor: not-allowed;
+  }
+  form input[type='file'] {
+    border: 1px dashed var(--color-ink-300);
+    background: var(--color-paper);
+    padding: 0.875rem;
+    color: var(--color-ink-600);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    width: 100%;
+  }
+  form input[type='file']::file-selector-button {
+    margin-right: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--color-ink-300);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  form input[type='checkbox'],
+  form input[type='radio'] {
+    accent-color: var(--color-oweru-700);
+    width: 1.0625rem;
+    height: 1.0625rem;
+    cursor: pointer;
+  }
+  form input[type='range'] { accent-color: var(--color-oweru-700); width: 100%; }
+
+  /* Labels: readable, sentence case, never shouty. */
+  form label {
+    display: block;
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  form label:has(+ input[type='checkbox']),
+  form label:has(+ input[type='radio']) { cursor: pointer; }
+
+  select, option { color: var(--color-ink-900); background-color: #fff; }
+
+  [role='menu'] {
+    background-color: #fff;
+    color: var(--color-ink-900);
+    border: 1px solid var(--color-ink-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-pop);
+  }
+  [role='menu'] a, [role='menu'] button { color: var(--color-ink-800); }
+  [role='menu'] a:hover, [role='menu'] button:hover {
+    background-color: var(--color-oweru-50);
+    color: var(--color-oweru-900);
+  }
+
+  /* Field wrapper: label above, control, then help / error text. */
+  .field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .field-hint { font-size: 0.8125rem; color: var(--color-ink-500); }
+  .field-error { font-size: 0.8125rem; color: var(--color-error-700); font-weight: 500; }
+
+  /* ============================================================
+     7. TABLES — quiet, scannable
+     ============================================================ */
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    color: var(--color-ink-500);
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--color-ink-200);
+    white-space: nowrap;
+  }
+  td, th { padding: 0.8125rem 0.875rem; text-align: left; vertical-align: middle; }
+  tbody tr { border-top: 1px solid var(--color-ink-100); }
+  tbody tr:hover { background: var(--color-paper); }
+  tfoot td { border-top: 1px solid var(--color-ink-200); font-weight: 600; }
+
+  @media (max-width: 767px) {
+    .table-scroll { display: block; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+    td, th { padding: 0.625rem 0.625rem; }
+  }
+
+  /* ============================================================
+     8. BADGES, PILLS, TAGS
+     ============================================================ */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .status-badge::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .status-badge-success { background: var(--color-success-50); color: var(--color-success-700); border-color: var(--color-success-200); }
+  .status-badge-warning { background: var(--color-warning-50); color: var(--color-warning-700); border-color: var(--color-warning-100); }
+  .status-badge-error   { background: var(--color-error-50);   color: var(--color-error-700);   border-color: var(--color-error-200); }
+  .status-badge-info    { background: var(--color-oweru-50);   color: var(--color-oweru-800);  border-color: var(--color-oweru-200); }
+  .status-badge-neutral { background: var(--color-paper);      color: var(--color-ink-600);    border-color: var(--color-ink-200); }
+  .status-badge-disabled{ background: var(--color-ink-50);     color: var(--color-ink-400);    border-color: var(--color-ink-200); }
+
+  /* Soft informational chip (categories, regions, counts). */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-ink-200);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-ink-700);
+    white-space: nowrap;
+  }
+  .chip-accent { background: var(--color-gold-50); border-color: var(--color-gold-200); color: var(--color-gold-800); }
+  .chip-brand  { background: var(--color-oweru-50); border-color: var(--color-oweru-200); color: var(--color-oweru-800); }
+
+  /* ============================================================
+     9. PROGRESS
+     ============================================================ */
+  .progress-track {
+    width: 100%;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--color-ink-100);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--color-oweru-600);
+    transition: width 0.7s var(--ease-out-soft);
+  }
+  .progress-fill-complete { background: var(--color-success-500); }
+  .progress-lg { height: 10px; }
+
+  /* ============================================================
+     10. STATES
+     ============================================================ */
+  .empty-state {
+    background: var(--color-surface);
+    border: 1px dashed var(--color-ink-300);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Auth backdrop: quiet forest wash, no blobs. */
+  .login-backdrop {
+    background:
+      linear-gradient(180deg, var(--color-oweru-950) 0%, var(--color-oweru-900) 55%, var(--color-oweru-800) 100%);
+  }
+  .login-brand-overlay {
+    background: linear-gradient(180deg, rgba(6, 28, 23, 0.25) 0%, rgba(6, 28, 23, 0.72) 100%);
+  }
+
+  /* ============================================================
+     11. PORTALS & DASHBOARDS
+     ============================================================ */
+  .portal-hero {
+    border: 1px solid var(--color-ink-200);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+  }
+  .portal-stat-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-ink-200);
+    border-radius: var(--radius-lg);
+  }
+  .portal-stat-card:nth-child(2n) { border-top-color: var(--color-gold-300); }
+  .portal-stat-card:nth-child(3n) { border-top-color: var(--color-oweru-300); }
+
+  /* Dense admin tables need tighter rhythm than public pages. */
+  .admin-table td, .admin-table th { padding: 0.625rem 0.75rem; }
+  .admin-table thead th {
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-ink-200);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-500);
+    white-space: nowrap;
+  }
+  .admin-table tbody td { border-top: 1px solid var(--color-ink-200); }
+  .admin-table tbody tr:first-child td { border-top: 0; }
+  .admin-table tbody tr { transition: background-color 0.15s ease; }
+  @media (hover: hover) {
+    .admin-table tbody tr:hover { background: var(--color-oweru-50); }
+  }
+  /* Wrapper that scrolls horizontally without lifting the whole table. */
+  .table-panel { overflow-x: auto; }
+
+  /* ============================================================
+     12. MARKETING SITE SCOPE + PAGE SECTIONS
+     The public site is a single sans-serif family: bold, clean
+     headings, no serif display. Portals/admin are unaffected
+     because they never mount inside .marketing.
+     ============================================================ */
+  .marketing {
+    --font-display: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  .marketing .display-xl { font-weight: 800; letter-spacing: -0.04em; }
+  .marketing .display-lg { font-weight: 800; letter-spacing: -0.035em; }
+  .marketing .display-md { font-weight: 700; letter-spacing: -0.028em; }
+  .marketing .stat-num { font-weight: 800; }
+
+  /* Neutral band that separates sections on a long page. */
+  .band-haze { background: var(--color-haze); }
+  /* Dark emphasis band. */
+  .band-coal {
+    background: var(--color-coal);
+    color: #fff;
+  }
+  .band-coal h1, .band-coal h2, .band-coal h3 { color: #fff; }
+
+  /* Full-bleed photography with a readable scrim on top.
+
+     Layering matters more than the gradient stops here: ::after is the
+     section's LAST child, so at z-index auto it paints over the copy and
+     turns white text almost black. The scrim is pinned to z-index 0 and
+     the copy sits on z-index 10, giving image -> scrim -> text.
+
+     Stops are tuned so headlines clear WCAG AA against bright outdoor
+     photography, not just dark photography. */
+  .photo-scrim::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(100deg, rgba(5, 12, 10, 0.92) 0%, rgba(5, 12, 10, 0.84) 34%, rgba(5, 12, 10, 0.62) 58%, rgba(5, 12, 10, 0.4) 80%, rgba(5, 12, 10, 0.32) 100%),
+      linear-gradient(to top, rgba(5, 12, 10, 0.55) 0%, rgba(5, 12, 10, 0) 46%);
+  }
+  @media (max-width: 767px) {
+    .photo-scrim::after {
+      background:
+        linear-gradient(to top, rgba(5, 12, 10, 0.93) 0%, rgba(5, 12, 10, 0.85) 45%, rgba(5, 12, 10, 0.64) 100%);
+    }
+  }
+
+  /* Every element that must sit above the scrim needs this. */
+  .photo-scrim .photo-copy {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Copy sitting on top of photography stays legible even when the
+     photo underneath is bright. Deliberately restrained: one tight
+     shadow for edge definition, one wide shadow for the text mass. */
+  .hero-copy {
+    text-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.45),
+      0 2px 20px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Image and dark info panel that read as one component. */
+  .split-feature { display: grid; }
+  @media (min-width: 1024px) {
+    .split-feature { grid-template-columns: 1.05fr 0.95fr; }
+  }
+
+  /* Cause card image: consistent 16:10, never stretched. */
+  .ratio-16-10 { aspect-ratio: 16 / 10; }
+
+  /* Compact icon tile used by the trust + process rows. */
+  .tile-icon {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-md);
+    background: var(--color-oweru-50);
+    color: var(--color-oweru-700);
+  }
+  .tile-icon-dark {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-gold-300);
+  }
+
+  /* ============================================================
+     13. LEGACY DECORATIVE CLASSES
+     Kept so older screens don't break, now visually neutral.
+     ============================================================ */
+  .curve-bottom, .curve-top { position: relative; }
+  .curve-top { border-radius: 0; }
+  .zigzag { position: relative; }
+  .blob-orange, .blob-amber { display: none; }
+  .hero-text { text-shadow: 0 1px 2px rgba(10, 20, 17, 0.4), 0 2px 12px rgba(10, 20, 17, 0.35); }
+  .no-hero-shadow { text-shadow: none; }
+}
+
+@layer utilities {
+  /* ---------- Motion ---------- */
+  .animate-fade-in { animation: fadeIn 0.4s var(--ease-out-soft) both; }
+  .animate-slide-up { animation: slideUp 0.45s var(--ease-out-soft) both; }
+  .animate-slide-in-right { animation: slideInRight 0.4s var(--ease-out-soft) both; }
+  .animate-scale-in { animation: scaleIn 0.3s var(--ease-out-soft) both; }
+  .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-ink-100) 25%, var(--color-ink-50) 37%, var(--color-ink-100) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Scroll reveal — one class, one observer, no MutationObserver churn. */
+  .reveal { opacity: 1; transform: none; }
+  .reveal.is-hidden { opacity: 0; transform: translateY(14px); }
+  .reveal.is-visible { opacity: 1; transform: none; transition: opacity 0.55s var(--ease-out-soft), transform 0.55s var(--ease-out-soft); }
+  .reveal-init { transform: translateY(14px); }
+  .reveal-init.reveal-in { transform: none; transition: transform 0.6s var(--ease-out-soft); }
+
+  /* Hairline grid for dark bands — texture without noise. */
+    /* Slanted section edges. The next section needs a matching slant in
+       the opposite direction or the two will not meet cleanly. */
+    .clip-angle-bottom {
+      clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+    }
+    .clip-angle-top {
+      clip-path: polygon(0 14%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .grid-texture {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .dot-texture {
+    background-image: radial-gradient(rgba(14, 59, 46, 0.11) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+@keyframes shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.animate-toast-in { animation: toast-in 0.2s var(--ease-out-soft) both; }
+
+@media print {
+  body * { visibility: hidden; }
+  .receipt-sheet, .receipt-sheet * { visibility: visible; }
+  .receipt-sheet {
+    position: absolute; left: 0; top: 0; margin: 0;
+    max-width: 100% !important; width: 100% !important;
+    box-shadow: none !important; border-radius: 0 !important;
+  }
+  .no-print { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal, .reveal.is-hidden, .reveal.is-visible { opacity: 1 !important; transform: none !important; }
+}

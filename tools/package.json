@@ -1,0 +1,14 @@
+{
+  "name": "oweru-docs-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zana za kutoa SRS documents (Markdown -> Word docx)",
+  "scripts": {
+    "build-srs": "node build-srs.js"
+  },
+  "dependencies": {
+    "docx": "^9.0.0",
+    "image-size": "^2.0.2",
+    "sharp": "^0.35.4"
+  }
+}

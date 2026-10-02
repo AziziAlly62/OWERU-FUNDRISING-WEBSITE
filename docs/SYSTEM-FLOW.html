@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWERU Foundation — System Flow Chart</title>
+<style>
+  :root {
+    --ink: #1f2430;
+    --muted: #5a6270;
+    --teal: #0e7c66;
+    --teal-bg: #e4f5f0;
+    --gold: #b8860b;
+    --gold-bg: #fbf3dd;
+    --coral: #d9642f;
+    --coral-bg: #fdeae0;
+    --blue: #2563eb;
+    --blue-bg: #e4ecfd;
+    --violet: #7c3aed;
+    --violet-bg: #efe9fd;
+    --line: #cfd6df;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #f4f6f8; color: var(--ink);
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  }
+  header {
+    background: linear-gradient(135deg, #123 0%, #0e7c66 100%);
+    color: #fff; padding: 28px 24px 34px; text-align: center;
+  }
+  header h1 { margin: 0; font-size: 1.6rem; letter-spacing: .02em; }
+  header p { margin: 8px 0 0; opacity: .85; font-size: .95rem; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    margin: -22px auto 26px; padding: 14px 18px; max-width: 900px;
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(31,36,48,.08); font-size: .82rem;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  main { max-width: 980px; margin: 0 auto; padding: 0 16px 60px; }
+  .phase-title {
+    font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    font-size: .8rem; margin: 34px 0 10px; padding-left: 8px;
+  }
+  .phase-title .n { color: var(--gold); margin-right: 6px; }
+  .diagram {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px 16px 22px; box-shadow: 0 4px 14px rgba(31,36,48,.06);
+  }
+  .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 6px 0; }
+  .node {
+    min-width: 160px; max-width: 300px; flex: 0 1 auto;
+    border: 1.5px solid var(--line); border-radius: 9px; padding: 10px 14px;
+    background: #fff; font-size: .82rem; text-align: center; position: relative;
+  }
+  .node .role {
+    display: block; font-size: .64rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .node.teal { border-color: var(--teal); background: var(--teal-bg); }
+  .node.gold { border-color: var(--gold); background: var(--gold-bg); }
+  .node.coral { border-color: var(--coral); background: var(--coral-bg); }
+  .node.blue { border-color: var(--blue); background: var(--blue-bg); }
+  .node.violet { border-color: var(--violet); background: var(--violet-bg); }
+  .node.dash { border-style: dashed; background: #fafbfc; }
+  .node .role.teal { color: var(--teal); }
+  .node .role.gold { color: var(--gold); }
+  .node .role.coral { color: var(--coral); }
+  .node .role.blue { color: var(--blue); }
+  .node .role.violet { color: var(--violet); }
+  .gate {
+    border: 2px solid var(--gold); background: #fff7e0; border-radius: 12px;
+    padding: 12px 14px; text-align: center; max-width: 640px; margin: 8px auto;
+  }
+  .gate .title { font-weight: 800; color: var(--gold); font-size: .86rem; margin-bottom: 8px; }
+  .gate .opts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .opt {
+    border: 1.5px solid var(--gold); background:#fff; border-radius: 7px;
+    padding: 6px 12px; font-size: .78rem;
+  }
+  .opt b { display: block; font-size: .85rem; }
+  .arrow { text-align: center; color: var(--muted); font-size: 1.5rem; line-height: 1; margin: 2px 0; user-select: none; }
+  .arrow .lbl { display: block; font-size: .68rem; color: var(--gold); font-weight: 700; margin-bottom: 2px; }
+  .branch { text-align: center; font-size: .82rem; margin: 4px 0; }
+  .branch code { background:#eef1f5; border:1px solid var(--line); border-radius:4px; padding:2px 8px; font-size:.76rem; }
+  .note {
+    background: #f7f9fb; border-left: 4px solid var(--gold); border-radius: 4px;
+    padding: 10px 14px; font-size: .8rem; margin: 14px 0; color: var(--muted);
+  }
+  .note b { color: var(--ink); }
+  .aside {
+    margin-top: 34px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .aside-card { background:#fff; border:1px solid var(--line); border-radius:10px; padding: 14px 16px; font-size:.82rem; }
+  .aside-card h3 { margin: 0 0 8px; font-size:.84rem; color: var(--teal); }
+  .aside-card ul { margin: 0; padding-left: 16px; }
+  .aside-card li { margin: 4px 0; }
+  footer { text-align:center; color: var(--muted); font-size:.75rem; padding: 18px 0 40px; }
+  footer code { background:#eef1f5; padding:1px 6px; border-radius:4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>OWERU Foundation — System Flow Chart</h1>
+  <p>Kutoka Ombi (Application) hadi Kifaa Kikafikia na Ripoti (Recipient + Monitoring)</p>
+</header>
+
+<div class="legend">
+  <span><span class="dot" style="background:var(--teal)"></span> Mwombaji / Recipient</span>
+  <span><span class="dot" style="background:var(--coral)"></span> Donor (Mtoaji)</span>
+  <span><span class="dot" style="background:var(--blue)"></span> Staff — OWERU (admin/manager)</span>
+  <span><span class="dot" style="background:var(--violet)"></span> Kanisa / Endorser</span>
+  <span><span class="dot" style="background:var(--gold)"></span> Gate / Uamuzi</span>
+</div>
+
+<main>
+
+  <!-- PHASE 1 -->
+  <div class="phase-title"><span class="n">1</span>APPLICATION — MWOMBAJI</div>
+  <div class="diagram">
+    <div class="row">
+      <div class="node teal"><span class="role teal">Applicant</span><b>MWOMBAJI</b><br>Mwana kanisa / shule / kliniki</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node teal"><span class="role teal">Frontend</span><b>/apply</b><br>Tuma ombi la kifaa</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node"><span class="role">Request</span><b>submitted</b><br>Vifaa vingi kwenye ombi</div>
+    </div>
+    <div class="branch">Tokanapo ombi pill linaundwa <code>track_token</code> la mwombaji wa mgeni kufuatilia kwenye <code>/track/:token</code></div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-title"><span class="n">2</span>REVIEW + VETTING — STAFF &amp; KANISA</div>
+  <div class="diagram">
+    <div class="row">
+      <div class="node blue"><span class="role blue">Admin / Manager</span><b>under_review</b><br>Kukagua taarifa</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="arrow">&#x2190;<span class="lbl">more_info_needed</span></div>
+      <div class="gate">
+        <div class="title">VETTING GATE — inahitaji ANGALAU MOJA (backend: 422 bila hiyo)</div>
+        <div class="opts">
+          <div class="opt"><b>1. Board</b>admin: board_approved</div>
+          <div class="opt"><b>2. KYC</b>5-step due diligence</div>
+          <div class="opt"><b>3. Kanisa</b>endorsement complete</div>
+        </div>
+      </div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node blue"><span class="role blue">Status</span><b>approved</b><br>&#x2192; published</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node"><span class="role">Public</span><b>/requests</b><br>Donor anaweza kuona</div>
+    </div>
+    <div class="note"><b>Auto-close:</b> kama vifaa vyote vimefunded tayari wakati wa publish, status inaruka moja kwa moja kwenda <b>funding_closed</b>.</div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-title"><span class="n">3</span>FUNDING — DONOR</div>
+  <div class="diagram">
+    <div class="row">
+      <div class="node coral"><span class="role coral">Donor</span><b>Fund an Item</b><br>M-Pesa / Card / Mobile / Bank</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node coral"><span class="role coral">Backend</span><b>fund</b><br>item lockForUpdate<br>+ remaining check</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node gold"><span class="role gold">Payment</span><b>confirmed</b><br>Simulated 4s / Flutterwave / Daraja</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node"><span class="role">Ledger</span><b>CREDIT</b><br>FundTransaction + balance</div>
+    </div>
+    <div class="branch">Pesa ikifika target ya kifaa → <b>item: fully_funded</b> &nbsp;|&nbsp; vifaa vyote → <b>request: funding_closed</b></div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-title"><span class="n">4</span>PROCUREMENT — STAFF + SUPPLIER</div>
+  <div class="diagram">
+    <div class="row">
+      <div class="node blue"><span class="role blue">Admin / Manager</span><b>Invoice: pending</b></div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node blue"><span class="role blue">Admin</span><b>markPaid</b><br>awaiting_receipt</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node blue"><span class="role blue">Admin</span><b>uploadReceipt</b><br>receipt_uploaded</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="gate">
+        <div class="title">APPROVE — balance &#8805; amount?</div>
+        <div class="opts">
+          <div class="opt"><b>HAPANA &#x2192; 422</b>Insufficient funds</div>
+          <div class="opt"><b>NDIYO</b>Invoice: paid &#8226; Item: ordered</div>
+        </div>
+      </div>
+    </div>
+    <div class="branch"><code>FundTransaction DEBIT</code> &#x2192; pesa inatoka OWERU kwenda supplier</div>
+    <div class="row">
+      <div class="node blue"><span class="role blue">AUTO</span><b>Equipment register</b><br>EQ-#### &#8226; mpokeaji &#8226; mahali</div>
+      <div class="node blue"><span class="role blue">AUTO</span><b>Reports 30-day + 90-day</b><br>zinaundwa + notification mwombaji</div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-title"><span class="n">5</span>DELIVERY + MONITORING</div>
+  <div class="diagram">
+    <div class="row">
+      <div class="node blue"><span class="role blue">Status</span><b>procurement</b></div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node violet"><span class="role violet">Uthibitisho wa Pandetatu</span><br><b>Recipient &#x2713;</b> Supplier &#x2713; Kanisa &#x2713;<br>EQUIPMENT: verified</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node teal"><span class="role teal">Recipient</span><b>delivered &#x2192; in_use</b><br>Request: delivered</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node teal"><span class="role teal">Applicant</span><b>Reports 30/90-day</b><br>anataja athari</div>
+      <div class="arrow">&#x2192;</div>
+      <div class="node blue"><span class="role blue">Admin</span><b>Review reports</b><br>active_reporting &#x2192; closed</div>
+    </div>
+  </div>
+
+  <!-- ASIDE -->
+  <div class="aside">
+    <div class="aside-card">
+      <h3>Uwazi &amp; Utegemea kwa umma</h3>
+      <ul>
+        <li><b>/ledger</b> — Public Spending Ledger (invoices zilizolipwa)</li>
+        <li><b>/reports</b> — Public impact stories</li>
+        <li><b>Complaints</b> — safeguarding / financial</li>
+        <li><b>Track</b> — mwombaji wa mgeni /track/:token</li>
+      </ul>
+    </div>
+    <div class="aside-card">
+      <h3>Staff — Admin vs Manager</h3>
+      <ul>
+        <li><b>Manager:</b> requests, items, invoices, equipment, reports, suppliers</li>
+        <li><b>Admin:</b> yote ya manager + users, donations, payments, ledger, audit-logs, exports</li>
+        <li>Kila action ya staff imerekodiwa kwenye <b>AuditLog</b></li>
+      </ul>
+    </div>
+    <div class="aside-card">
+      <h3>Pesa — Rule ya Mwisho</h3>
+      <ul>
+        <li>Donor &#x2192; Payment provider &#x2192; OWERU &#x2192; Supplier</li>
+        <li><b>Hakuna njia inayolipa mwombaji/recipient</b></li>
+        <li>Donations: item-level, all-or-nothing, dirisha la siku 60</li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  OWERU Foundation &mdash; Laravel 12 + React SPA &nbsp;|&nbsp;
+  Backend <code>http://127.0.0.1:8001</code> &nbsp;|&nbsp; Frontend <code>http://localhost:5173</code><br>
+  Flow inatokana moja kwa moja na code (RequestController, DonationController, InvoiceController)
+</footer>
+
+</body>
+</html>
